@@ -30,18 +30,6 @@ function ProfileRelationsBox(propriedades) {
       <h2 className="smallTitle">
         {propriedades.title} ({propriedades.items.length})
       </h2>
-      <ul>
-        {/* {seguidores.map((itemAtual) => {
-          return (
-            <li key={itemAtual}>
-              <a href={`https://github.com/${itemAtual}.png`}>
-                <img src={itemAtual.image} />
-                <span>{itemAtual.title}</span>
-              </a>
-            </li>
-          )
-        })} */}
-      </ul>
     </ProfileRelationsBoxWrapper>
   )
 }
@@ -49,19 +37,16 @@ function ProfileRelationsBox(propriedades) {
 export default function Home(props) {
   const usuarioAleatorio = props.githubUser;
   const [comunidades, setComunidades] = React.useState([]);
-  // const comunidades = comunidades[0];
-  // const alteradorDeComunidades/setComunidades = comunidades[1];
-  // const comunidades = ['Alurakut'];
+
   const pessoasFavoritas = [
-    'juunegreiros',
-    'omariosouto',
-    'peas',
-    'rafaballerini',
-    'marcobrunodev',
-    'felipefialho',
+    'alexporto90',
+    'lucamagalhaes',
+    'RogerW-Hero99',
+    'leonardopliski',
+    'wesleygsilva',
+    'NathaliaO',
   ]
   const [seguidores, setSeguidores] = React.useState([]);
-  // 0 - Pegar o array de dados do github 
   React.useEffect(function() {
     // GET
     fetch('https://api.github.com/users/peas/followers')
@@ -96,22 +81,16 @@ export default function Home(props) {
       console.log(comunidadesVindasDoDato)
       setComunidades(comunidadesVindasDoDato)
     })
-    // .then(function (response) {
-    //   return response.json()
-    // })
 
   }, [])
 
   console.log('seguidores antes do return', seguidores);
 
-  // 1 - Criar um box que vai ter um map, baseado nos items do array
-  // que pegamos do GitHub
 
   return (
     <>
       <AlurakutMenu />
       <MainGrid>
-        {/* <Box style="grid-area: profileArea;"> */}
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
           <ProfileSidebar githubUser={usuarioAleatorio} />
         </div>
@@ -234,14 +213,6 @@ export async function getServerSideProps(ctx) {
       },
     }
   }
-
-  // const followers = await fetch(`https://api.github.com/users/${githubUser}/followers`)
-  //   .then((res) => res.json())
-  //   .then(followers => followers.map((follower) => ({
-  //     id: follower.id,
-  //     name: follower.login,
-  //     image: follower.avatar_url,
-  //   })));
 
   return {
     props: {
